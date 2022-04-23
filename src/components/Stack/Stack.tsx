@@ -1,8 +1,6 @@
-import { motion } from "framer-motion";
-import { FC, useCallback, useMemo, useRef, useState } from "react";
-import styled from "styled-components";
-import { colors, flex } from "styles";
+import { FC, useCallback, useRef, useState } from "react";
 import { Card } from "./Card";
+import { StyledStack } from "./styles";
 
 type Props = {
   items: string[];
@@ -10,19 +8,13 @@ type Props = {
 
 export const Stack: FC<Props> = ({ items }) => {
   const [stack, setStack] = useState(items);
-  const [stackChangeCount, setStackChangeCount] = useState(0);
   const stackRef = useRef<HTMLDivElement>(null);
 
   const removeAfterVote = useCallback((item: string) => {
     setStack((currentItems) => {
       return currentItems.filter((i) => i !== item);
     });
-    incrementStackChangeCount();
   }, []);
-
-  const incrementStackChangeCount = () => {
-    setStackChangeCount((prev) => prev + 1);
-  };
 
   return (
     <StyledStack ref={stackRef}>
@@ -36,19 +28,9 @@ export const Stack: FC<Props> = ({ items }) => {
             text={card}
             stackRef={stackRef}
             removeAfterVote={removeAfterVote}
-            stackChangeCount={stackChangeCount}
           />
         );
       })}
     </StyledStack>
   );
 };
-
-const StyledStack = styled(motion.div)`
-  ${flex("row", "center", "center")};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  background-color: ${colors.secondary};
-`;

@@ -2,6 +2,12 @@ export const colors = {
   secondary: "#292D3E",
 };
 
+export const gradients = {
+  red: "linear-gradient(90deg, rgb(211, 9, 225) 0%, #ff008c 100%)",
+  white: "linear-gradient(90deg, #fff 0%,  #fff 100%)",
+  green: "linear-gradient(90deg, rgb(3, 209, 0) 0%, rgb(230, 255, 0) 100%)",
+};
+
 export const grays = {
   dark: "#444444",
   medium: "#8b8b8b",
@@ -28,6 +34,5 @@ export const fontSize = {
   xxl: "3rem",
 };
 
-//Shadow
 export const boxShadow =
   "0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(166, 173, 201, 0.2)";
