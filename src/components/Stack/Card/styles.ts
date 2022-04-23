@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { flex } from "styles";
+import { boxShadow, flex } from "styles";
 
 export const StyledCard = styled(motion.div)`
   ${flex("column", "center", "center")};
@@ -10,6 +10,7 @@ export const StyledCard = styled(motion.div)`
   background-color: lightseagreen;
   cursor: pointer;
   border-radius: 0.4rem;
+  box-shadow: ${boxShadow};
 `;
 
 export const StyledUnderCard = styled(motion.div)`

@@ -1,5 +1,6 @@
 import { PanInfo } from "framer-motion";
 import { FC } from "react";
+import { useResults } from "../ResultsProvider";
 import { transitionTimeMS, voteNoXPos, voteYesXPos } from "./constants";
 import { StyledCard, StyledUnderCard } from "./styles";
 import { useCardAnimation } from "./useCardAnimation";
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export const Card: FC<Props> = ({ text, isTop, stackRef, removeAfterVote }) => {
+  const { dispatch } = useResults();
+
   const {
     x,
     throwCardOffScreen,
@@ -30,7 +33,7 @@ export const Card: FC<Props> = ({ text, isTop, stackRef, removeAfterVote }) => {
   };
 
   const handleVote = (vote: "yes" | "no") => {
-    console.log(`voting ${vote} : collect results`);
+    dispatch({ type: "logResult", payload: { id: text, vote } });
     throwCardOffScreen(vote === "yes" ? "right" : "left");
     fadeOutUnderCard();
     removeCardFromStack();

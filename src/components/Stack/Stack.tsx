@@ -1,5 +1,7 @@
 import { FC, useCallback, useRef, useState } from "react";
 import { Card } from "./Card";
+import { ResultsCard } from "./ResultsCard";
+import { useResults } from "./ResultsProvider";
 import { StyledStack } from "./styles";
 
 type Props = {
@@ -31,6 +33,8 @@ export const Stack: FC<Props> = ({ items }) => {
           />
         );
       })}
+
+      <ResultsCard totalCards={items.length} />
     </StyledStack>
   );
 };

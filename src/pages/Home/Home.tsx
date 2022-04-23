@@ -1,31 +1,16 @@
 import { Stack } from "components/Stack";
+import { ResultsProvider } from "components/Stack/ResultsProvider";
 import { cards } from "data/cards";
-import styled from "styled-components";
-import { colors } from "styles";
-import { flex } from "styles/mixins";
+import { StyledCardContainer, StyledHome } from "./styles";
 
 export const Home = () => {
   return (
     <StyledHome>
       <StyledCardContainer>
-        <Stack items={cards} />
+        <ResultsProvider>
+          <Stack items={cards} />
+        </ResultsProvider>
       </StyledCardContainer>
     </StyledHome>
   );
 };
-
-export const StyledHome = styled.section`
-  ${flex("column", "center", "center")};
-  height: 100vh;
-  width: 100vw;
-  background-color: ${colors.secondary};
-`;
-
-export const StyledCardContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  max-height: 90rem;
-  max-width: 45rem;
-  background-color: white;
-  border-radius: 0.4rem;
-`;
