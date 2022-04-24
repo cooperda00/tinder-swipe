@@ -14,6 +14,7 @@ type State = {
   techniques: Technique[];
   techniqueStack: Technique[];
   results: Record<string, { name: string; vote: Vote }>;
+  topCardId: string | undefined;
 };
 
 type ResultsProviderProps = { children: ReactNode; techniques: Technique[] };
@@ -28,17 +29,21 @@ const defaultState: State = {
   techniques: [],
   techniqueStack: [],
   results: {},
+  topCardId: undefined,
 };
 
 // Reducer
 const stackReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "removeCardFromStack": {
+      const filteredCards = state.techniqueStack.filter(
+        (technique) => technique.id !== action.payload.id
+      );
+
       return {
         ...state,
-        techniqueStack: state.techniqueStack.filter(
-          (technique) => technique.id !== action.payload.id
-        ),
+        techniqueStack: filteredCards,
+        topCardId: filteredCards[filteredCards.length - 1]?.id ?? undefined,
       };
     }
 
@@ -60,6 +65,8 @@ const stackReducer = (state: State, action: Action): State => {
         ...state,
         techniqueStack: state.techniques,
         results: {},
+        topCardId:
+          state.techniques[state.techniques.length - 1]?.id ?? undefined,
       };
     }
 
@@ -75,6 +82,7 @@ const StackProvider = ({ children, techniques }: ResultsProviderProps) => {
     ...defaultState,
     techniques,
     techniqueStack: techniques,
+    topCardId: techniques[techniques.length - 1].id,
   });
 
   const value = { state, dispatch };
