@@ -34,7 +34,10 @@ export const Card: FC<Props> = ({ technique, isTop, stackRef }) => {
   };
 
   const handleVote = (vote: "yes" | "no") => {
-    dispatch({ type: "logResult", payload: { id: technique.id, vote } });
+    dispatch({
+      type: "logResult",
+      payload: { id: technique.id, name: technique.name, vote },
+    });
     throwCardOffScreen(vote === "yes" ? "right" : "left");
     fadeOutUnderCard();
     removeCardFromStack();

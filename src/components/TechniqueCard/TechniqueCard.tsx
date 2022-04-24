@@ -21,6 +21,12 @@ export const TechniqueCard: FC<Props> = ({ technique }) => {
       </ul>
 
       <p>{technique.description}</p>
+
+      <p>
+        <strong>
+          Did you hit this technique in your last sparring session?
+        </strong>
+      </p>
     </StyledTechniqueCard>
   );
 };

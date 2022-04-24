@@ -5,15 +5,15 @@ import { Vote } from "../types";
 // Types
 type Action =
   | { type: "removeCardFromStack"; payload: { id: string } }
-  | { type: "logResult"; payload: { id: string; vote: Vote } }
+  | { type: "logResult"; payload: { id: string; vote: Vote; name: string } }
   | { type: "reset" };
 
 type Dispatch = (action: Action) => void;
 
 type State = {
   techniques: Technique[];
-  results: Record<string, Vote>;
-  initialNumberOfCards: number;
+  techniqueStack: Technique[];
+  results: Record<string, { name: string; vote: Vote }>;
 };
 
 type ResultsProviderProps = { children: ReactNode; techniques: Technique[] };
@@ -26,8 +26,8 @@ const StackStateContext = createContext<
 // Default State
 const defaultState: State = {
   techniques: [],
+  techniqueStack: [],
   results: {},
-  initialNumberOfCards: 0,
 };
 
 // Reducer
@@ -36,7 +36,7 @@ const stackReducer = (state: State, action: Action): State => {
     case "removeCardFromStack": {
       return {
         ...state,
-        techniques: state.techniques.filter(
+        techniqueStack: state.techniqueStack.filter(
           (technique) => technique.id !== action.payload.id
         ),
       };
@@ -47,13 +47,24 @@ const stackReducer = (state: State, action: Action): State => {
         ...state,
         results: {
           ...state.results,
-          [action.payload.id]: action.payload.vote,
+          [action.payload.id]: {
+            name: action.payload.name,
+            vote: action.payload.vote,
+          },
         },
       };
     }
 
+    case "reset": {
+      return {
+        ...state,
+        techniqueStack: state.techniques,
+        results: {},
+      };
+    }
+
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      return state;
     }
   }
 };
@@ -63,7 +74,7 @@ const StackProvider = ({ children, techniques }: ResultsProviderProps) => {
   const [state, dispatch] = useReducer(stackReducer, {
     ...defaultState,
     techniques,
-    initialNumberOfCards: techniques.length,
+    techniqueStack: techniques,
   });
 
   const value = { state, dispatch };

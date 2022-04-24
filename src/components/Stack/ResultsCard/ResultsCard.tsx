@@ -1,20 +1,22 @@
+import { Button } from "components/Button";
 import { FC, useMemo } from "react";
 import { useStack } from "../StackProvider";
 import { StyledResultsCard } from "./styles";
 
-type Props = {
-  totalCards: number;
-};
-
-export const ResultsCard: FC<Props> = ({ totalCards }) => {
+export const ResultsCard: FC = () => {
   const {
-    state: { results },
+    state: { techniqueStack, results },
+    dispatch,
   } = useStack();
 
+  const resetSession = () => {
+    dispatch({ type: "reset" });
+  };
+
   const isComplete = useMemo(() => {
-    if (Object.keys(results).length === totalCards) return true;
+    if (techniqueStack.length === 0) return true;
     return false;
-  }, [results, totalCards]);
+  }, [techniqueStack]);
 
   if (!isComplete) return null;
 
@@ -24,15 +26,30 @@ export const ResultsCard: FC<Props> = ({ totalCards }) => {
 
       <p>You completed the deck</p>
 
+      {/* TODO : Give a list of failed techniques for the user to try instead of emojis */}
+
       <ul>
-        {Object.entries(results).map(([id, vote]) => {
+        {Object.entries(results).map(([id, { name, vote }]) => {
           return (
             <li key={id}>
-              <strong>{id}</strong> : {vote}
+              <strong>{name}</strong> : {vote === "yes" ? "✅" : "❌"}
             </li>
           );
         })}
       </ul>
+
+      <div className="button-container">
+        <Button
+          clickHandler={resetSession}
+          text="Review Again"
+          type="warning"
+        />
+        <Button
+          clickHandler={() => {}}
+          text="Complete Session"
+          type="success"
+        />
+      </div>
     </StyledResultsCard>
   );
 };

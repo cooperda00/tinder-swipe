@@ -17,11 +17,16 @@ export const StyledResultsCard = styled.div`
 
   > ul {
     list-style-type: none;
-    padding-top: ${spacing.m};
-    padding-left: 0;
+    padding-top: ${spacing.xl};
 
     > li {
       font-size: ${fontSize.m};
     }
+  }
+
+  .button-container {
+    ${flex("row", "space-around", "center")};
+    width: 100%;
+    padding-top: ${spacing.xl};
   }
 `;

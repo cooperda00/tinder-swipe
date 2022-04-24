@@ -1,5 +1,8 @@
 export const colors = {
+  primary: "#daeaf6",
   secondary: "#292D3E",
+  success: "#ddedea",
+  warning: "#fcf4dd",
 };
 
 export const gradients = {

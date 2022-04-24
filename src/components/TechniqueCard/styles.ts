@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { flex, spacing, fontSize } from "styles";
+import { flex, spacing, fontSize, colors } from "styles";
 
 export const StyledTechniqueCard = styled.div`
   ${flex("column", "flex-start", "flex-start")};
@@ -21,7 +21,7 @@ export const StyledTechniqueCard = styled.div`
     li {
       font-size: ${fontSize.s};
       padding: 0.3rem 1rem;
-      background-color: #daeaf6;
+      background-color: ${colors.primary};
       border-radius: 0.4rem;
     }
   }

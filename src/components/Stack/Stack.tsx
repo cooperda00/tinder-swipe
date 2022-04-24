@@ -6,15 +6,15 @@ import { StyledStack } from "./styles";
 
 export const Stack: FC = () => {
   const {
-    state: { techniques },
+    state: { techniqueStack },
   } = useStack();
 
   const stackRef = useRef<HTMLDivElement>(null);
 
   return (
     <StyledStack ref={stackRef}>
-      {techniques.map((technique, i) => {
-        const isTop = i === techniques.length - 1;
+      {techniqueStack.map((technique, i) => {
+        const isTop = i === techniqueStack.length - 1;
 
         return (
           <Card
@@ -26,7 +26,7 @@ export const Stack: FC = () => {
         );
       })}
 
-      <ResultsCard totalCards={techniques.length} />
+      <ResultsCard />
     </StyledStack>
   );
 };
