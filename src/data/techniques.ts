@@ -2,6 +2,7 @@ import { Technique } from "types";
 import stepOverKneebar from "assets/videos/step_over_kneebar.mp4";
 import ukiWaza from "assets/videos/uki_waza.mp4";
 import ashiEntry from "assets/videos/ashi_entry_top_knee_shield.mp4";
+import darceEscape from "assets/videos/darce_escape.mp4";
 
 export const techniques: Technique[] = [
   {
@@ -27,5 +28,13 @@ export const techniques: Technique[] = [
       "From top half guard if there is some space to fit toes in. Pin the far arm, hop in with your foot to standard ashi. Collect the far leg for a leg lock.",
     tags: ["half guard", "leg lock"],
     url: ashiEntry,
+  },
+  {
+    id: "3",
+    name: "Priit D'arce Escape",
+    description:
+      "With the arm that is being pressed into neck, reach for far side leg/hip to help move to bottom north south. Switch that arm to other hip and use to continue moving around to bottom side control with good defensive posture",
+    tags: ["escape"],
+    url: darceEscape,
   },
 ];
