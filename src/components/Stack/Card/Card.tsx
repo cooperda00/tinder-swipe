@@ -2,7 +2,7 @@ import { TechniqueCard } from "components/TechniqueCard";
 import { PanInfo } from "framer-motion";
 import { FC } from "react";
 import { Technique } from "types";
-import { useResults } from "../ResultsProvider";
+import { useStack } from "../StackProvider";
 import { transitionTimeMS, voteNoXPos, voteYesXPos } from "./constants";
 import { StyledCard, StyledUnderCard } from "./styles";
 import { useCardAnimation } from "./useCardAnimation";
@@ -11,16 +11,10 @@ type Props = {
   technique: Technique;
   isTop: boolean;
   stackRef: React.RefObject<HTMLDivElement>;
-  removeAfterVote: (item: string) => void;
 };
 
-export const Card: FC<Props> = ({
-  technique,
-  isTop,
-  stackRef,
-  removeAfterVote,
-}) => {
-  const { dispatch } = useResults();
+export const Card: FC<Props> = ({ technique, isTop, stackRef }) => {
+  const { dispatch } = useStack();
 
   const {
     x,
@@ -35,7 +29,7 @@ export const Card: FC<Props> = ({
 
   const removeCardFromStack = () => {
     setTimeout(() => {
-      removeAfterVote(technique.id);
+      dispatch({ type: "removeCardFromStack", payload: { id: technique.id } });
     }, transitionTimeMS);
   };
 

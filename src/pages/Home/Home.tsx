@@ -1,5 +1,5 @@
 import { Stack } from "components/Stack";
-import { ResultsProvider } from "components/Stack/ResultsProvider";
+import { StackProvider } from "components/Stack/StackProvider";
 import { techniques } from "data/techniques";
 import { StyledCardContainer, StyledHome } from "./styles";
 
@@ -7,9 +7,9 @@ export const Home = () => {
   return (
     <StyledHome>
       <StyledCardContainer>
-        <ResultsProvider>
-          <Stack techniques={techniques} />
-        </ResultsProvider>
+        <StackProvider techniques={techniques}>
+          <Stack />
+        </StackProvider>
       </StyledCardContainer>
     </StyledHome>
   );

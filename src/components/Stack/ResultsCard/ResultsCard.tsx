@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-import { useResults } from "../ResultsProvider";
+import { useStack } from "../StackProvider";
 import { StyledResultsCard } from "./styles";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const ResultsCard: FC<Props> = ({ totalCards }) => {
   const {
     state: { results },
-  } = useResults();
+  } = useStack();
 
   const isComplete = useMemo(() => {
     if (Object.keys(results).length === totalCards) return true;
