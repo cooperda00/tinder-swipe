@@ -1,6 +1,6 @@
 import { Stack } from "components/Stack";
 import { ResultsProvider } from "components/Stack/ResultsProvider";
-import { cards } from "data/cards";
+import { techniques } from "data/techniques";
 import { StyledCardContainer, StyledHome } from "./styles";
 
 export const Home = () => {
@@ -8,7 +8,7 @@ export const Home = () => {
     <StyledHome>
       <StyledCardContainer>
         <ResultsProvider>
-          <Stack items={cards} />
+          <Stack techniques={techniques} />
         </ResultsProvider>
       </StyledCardContainer>
     </StyledHome>

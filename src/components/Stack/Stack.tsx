@@ -1,40 +1,40 @@
 import { FC, useCallback, useRef, useState } from "react";
+import { Technique } from "types";
 import { Card } from "./Card";
 import { ResultsCard } from "./ResultsCard";
-import { useResults } from "./ResultsProvider";
 import { StyledStack } from "./styles";
 
 type Props = {
-  items: string[];
+  techniques: Technique[];
 };
 
-export const Stack: FC<Props> = ({ items }) => {
-  const [stack, setStack] = useState(items);
+export const Stack: FC<Props> = ({ techniques }) => {
+  const [stack, setStack] = useState(techniques);
   const stackRef = useRef<HTMLDivElement>(null);
 
   const removeAfterVote = useCallback((item: string) => {
     setStack((currentItems) => {
-      return currentItems.filter((i) => i !== item);
+      return currentItems.filter((i) => i.id !== item);
     });
   }, []);
 
   return (
     <StyledStack ref={stackRef}>
-      {stack.map((card, i) => {
+      {stack.map((technique, i) => {
         const isTop = i === stack.length - 1;
 
         return (
           <Card
-            key={card}
+            key={technique.id}
             isTop={isTop}
-            text={card}
+            technique={technique}
             stackRef={stackRef}
             removeAfterVote={removeAfterVote}
           />
         );
       })}
 
-      <ResultsCard totalCards={items.length} />
+      <ResultsCard totalCards={techniques.length} />
     </StyledStack>
   );
 };

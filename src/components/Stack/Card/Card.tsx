@@ -1,18 +1,25 @@
+import { TechniqueCard } from "components/TechniqueCard";
 import { PanInfo } from "framer-motion";
 import { FC } from "react";
+import { Technique } from "types";
 import { useResults } from "../ResultsProvider";
 import { transitionTimeMS, voteNoXPos, voteYesXPos } from "./constants";
 import { StyledCard, StyledUnderCard } from "./styles";
 import { useCardAnimation } from "./useCardAnimation";
 
 type Props = {
-  text: string;
+  technique: Technique;
   isTop: boolean;
   stackRef: React.RefObject<HTMLDivElement>;
   removeAfterVote: (item: string) => void;
 };
 
-export const Card: FC<Props> = ({ text, isTop, stackRef, removeAfterVote }) => {
+export const Card: FC<Props> = ({
+  technique,
+  isTop,
+  stackRef,
+  removeAfterVote,
+}) => {
   const { dispatch } = useResults();
 
   const {
@@ -28,12 +35,12 @@ export const Card: FC<Props> = ({ text, isTop, stackRef, removeAfterVote }) => {
 
   const removeCardFromStack = () => {
     setTimeout(() => {
-      removeAfterVote(text);
+      removeAfterVote(technique.id);
     }, transitionTimeMS);
   };
 
   const handleVote = (vote: "yes" | "no") => {
-    dispatch({ type: "logResult", payload: { id: text, vote } });
+    dispatch({ type: "logResult", payload: { id: technique.id, vote } });
     throwCardOffScreen(vote === "yes" ? "right" : "left");
     fadeOutUnderCard();
     removeCardFromStack();
@@ -61,8 +68,7 @@ export const Card: FC<Props> = ({ text, isTop, stackRef, removeAfterVote }) => {
         onDragEnd={handleDragEnd}
         whileTap={{ scale: 0.99 }}
       >
-        <h1>{text}</h1>
-        {/* TODO: pass a card object as props and render a component within here */}
+        <TechniqueCard technique={technique} />
       </StyledCard>
     </>
   );

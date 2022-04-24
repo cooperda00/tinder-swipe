@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 /*
 Josh's Custom CSS Reset
@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
     * {
         margin: 0;
+        padding: 0;
     }
 
     html {
@@ -45,5 +46,5 @@ const GlobalStyle = createGlobalStyle`
         isolation: isolate;
     }
 `;
- 
+
 export default GlobalStyle;

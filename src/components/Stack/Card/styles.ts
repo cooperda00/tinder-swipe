@@ -7,7 +7,6 @@ export const StyledCard = styled(motion.div)`
   height: 100%;
   width: 100%;
   position: absolute;
-  background-color: lightseagreen;
   cursor: pointer;
   border-radius: 0.4rem;
   box-shadow: ${boxShadow};

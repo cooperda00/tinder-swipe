@@ -27,7 +27,7 @@ export const ResultsCard: FC<Props> = ({ totalCards }) => {
       <ul>
         {Object.entries(results).map(([id, vote]) => {
           return (
-            <li>
+            <li key={id}>
               <strong>{id}</strong> : {vote}
             </li>
           );
